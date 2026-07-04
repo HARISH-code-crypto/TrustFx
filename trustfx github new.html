@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrustFX — India's Highest Velocity Forex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --font-sans:"Inter",ui-sans-serif,system-ui,sans-serif;
+  --font-display:"Space Grotesk",sans-serif;
+  --font-mono:"JetBrains Mono",monospace;
+  --primary:#00e479;
+  --on-secondary:#003642;
+  --secondary:#3cd7ff;
+  --on-surface:#e1e2e7;
+  --surface:#111417;
+  --background:#111417;
+  --surface-container:#1d2023;
+  --surface-container-low:#191c1f;
+  --surface-container-lowest:#0c0e12;
+  --surface-container-high:#282a2e;
+  --surface-container-highest:#323539;
+  --on-surface-variant:#b9cbb9;
+  --amber:#F59E0B;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;background-color:var(--background);color:var(--on-surface);
+  font-family:var(--font-sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+::selection{background:rgba(0,228,121,0.35);color:#000;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;}
+.font-display{font-family:var(--font-display);}
+.font-mono{font-family:var(--font-mono);}
+.container{max-width:1280px;margin:0 auto;padding:0 24px;}
+.container-md{max-width:960px;margin:0 auto;padding:0 24px;}
+.container-sm{max-width:768px;margin:0 auto;padding:0 24px;}
+
+/* ---------- Glass utilities ---------- */
+.glass{
+  background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.glass-card{
+  background:rgba(255,255,255,0.03);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.08);
+  transition:all .3s ease;
+}
+.glass-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(0,228,121,.3);}
+.neon-glow{box-shadow:0 0 20px rgba(0,228,121,.2);}
+.rounded-full{border-radius:999px;}
+
+/* ---------- Nav ---------- */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:24px 0;transition:all .3s ease;background:transparent;
+}
+.navbar.scrolled{
+  background:rgba(17,20,23,0.95);backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,.1);padding:14px 0;
+  box-shadow:0 20px 40px rgba(0,0,0,.4);
+}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.logo-mark{
+  width:36px;height:36px;border-radius:10px;background:radial-gradient(circle at 30% 30%, var(--primary), #007a45);
+  display:flex;align-items:center;justify-content:center;font-weight:700;color:#000;font-family:var(--font-display);
+  filter:drop-shadow(0 0 8px rgba(0,228,121,.5));
+}
+.logo-text{font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--primary);letter-spacing:-.5px;}
+.nav-links{display:flex;align-items:center;gap:32px;font-size:14px;}
+.nav-links button{background:none;border:none;color:var(--on-surface-variant);font-weight:500;padding-bottom:4px;transition:color .2s;}
+.nav-links button:hover{color:#fff;}
+.nav-links button.active{color:var(--primary);border-bottom:2px solid var(--primary);}
+.nav-ctas{display:flex;align-items:center;gap:20px;}
+.btn-link{background:none;border:none;color:var(--on-surface-variant);font-weight:600;font-size:14px;transition:color .2s;}
+.btn-link:hover{color:#fff;}
+.btn-primary{
+  background:var(--primary);color:#000;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.05em;
+  padding:12px 24px;border:none;border-radius:999px;transition:transform .2s, opacity .2s;
+  box-shadow:0 10px 25px rgba(0,228,121,.2);
+}
+.btn-primary:hover{transform:scale(1.05);}
+.btn-primary:active{transform:scale(.95);}
+.mobile-toggle{display:none;background:none;border:none;color:#fff;font-size:24px;}
+.mobile-menu{
+  display:none;position:fixed;top:76px;left:0;right:0;z-index:900;
+  background:rgba(17,20,23,0.98);backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(255,255,255,.1);padding:24px;flex-direction:column;gap:18px;
+}
+.mobile-menu.open{display:flex;}
+.mobile-menu button{background:none;border:none;color:#fff;text-align:left;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:14px;}
+.mobile-cta-row{display:flex;gap:12px;padding-top:8px;}
+.mobile-cta-row button{flex:1;text-align:center;padding:12px;border-radius:12px;font-weight:700;font-size:13px;border:1px solid rgba(255,255,255,.1);}
+.mobile-cta-row button.primary{background:var(--primary);color:#000;border:none;}
+
+@media (max-width:900px){
+  .nav-links, .nav-ctas{display:none;}
+  .mobile-toggle{display:block;}
+}
+
+/* ---------- Ticker ---------- */
+.ticker-wrap{width:100%;overflow:hidden;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(255,255,255,.1);padding:12px 0;white-space:nowrap;position:relative;z-index:400;}
+.ticker-content{display:inline-flex;gap:48px;animation:ticker-scroll 25s linear infinite;
+  font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--on-surface-variant);align-items:center;}
+.ticker-group{display:flex;gap:48px;align-items:center;}
+@keyframes ticker-scroll{0%{transform:translate3d(0,0,0);}100%{transform:translate3d(-33.333%,0,0);}}
+.up{color:var(--primary);font-weight:700;}
+.down{color:#f87171;font-weight:700;}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:82vh;display:flex;align-items:center;overflow:hidden;padding:70px 24px;margin-top:70px;}
+.hero-glow{
+  position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;mix-blend-mode:screen;
+  background:radial-gradient(circle at 30% 40%, rgba(0,228,121,.25), transparent 45%),
+             radial-gradient(circle at 75% 60%, rgba(60,215,255,.18), transparent 40%);
+  animation:pulseGlow 6s ease-in-out infinite;
+}
+@keyframes pulseGlow{0%,100%{opacity:.4;}50%{opacity:.65;}}
+.hero-grid{max-width:1280px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;z-index:2;}
+@media (max-width:1024px){.hero-grid{grid-template-columns:1fr;}}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;color:var(--primary);font-family:var(--font-display);
+  font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.15em;background:rgba(0,228,121,.1);
+  padding:7px 16px;border-radius:999px;border:1px solid rgba(0,228,121,.2);width:fit-content;
+}
+.dot{width:8px;height:8px;border-radius:999px;background:var(--primary);animation:pulse 1.6s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+h1.hero-title{font-family:var(--font-display);font-size:clamp(34px,5vw,58px);font-weight:700;color:#fff;line-height:1.08;margin:20px 0 16px;}
+h1.hero-title .accent{color:var(--primary);filter:drop-shadow(0 0 15px rgba(0,228,121,.2));}
+.hero-copy{font-size:15px;color:var(--on-surface-variant);max-width:560px;line-height:1.7;margin-bottom:8px;}
+.hero-btns{display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 32px;}
+.btn-outline{
+  background:rgba(255,255,255,.03);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);
+  color:#fff;font-family:var(--font-display);font-weight:700;font-size:14px;padding:16px 32px;border-radius:14px;transition:.2s;
+}
+.btn-outline:hover{background:rgba(255,255,255,.1);}
+.btn-hero{
+  background:var(--primary);color:#000;font-family:var(--font-display);font-weight:700;font-size:14px;
+  padding:16px 32px;border:none;border-radius:14px;display:inline-flex;align-items:center;gap:8px;transition:transform .2s;
+}
+.btn-hero:hover{transform:translateY(-2px);}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;border-top:1px solid rgba(255,255,255,.1);padding-top:32px;max-width:560px;}
+.hero-stats .num{font-family:var(--font-display);font-size:clamp(20px,2vw,26px);font-weight:700;color:#fff;}
+.hero-stats .label{font-size:10px;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.1em;margin-top:4px;}
+
+.hero-card{
+  padding:32px;border-radius:24px;width:100%;max-width:420px;margin-left:auto;position:relative;overflow:hidden;
+  box-shadow:0 30px 60px rgba(0,0,0,.4);
+}
+@media (max-width:1024px){.hero-card{margin:0 auto;}}
+.hero-card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;}
+.hero-card-top .label{font-size:11px;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.1em;font-family:var(--font-display);}
+.hero-card-top .value{font-size:24px;font-weight:700;color:#fff;font-family:var(--font-display);margin-top:4px;}
+.icon-box{background:rgba(0,228,121,.1);padding:12px;border-radius:14px;border:1px solid rgba(0,228,121,.2);color:var(--primary);}
+.spark-row{display:flex;justify-content:space-between;font-size:12px;color:var(--on-surface-variant);margin-bottom:10px;}
+.spark-chart{height:112px;width:100%;background:rgba(0,0,0,.4);border-radius:14px;position:relative;overflow:hidden;padding:8px;display:flex;align-items:flex-end;}
+.spark-chart svg{position:absolute;inset:0;width:100%;height:100%;}
+.spark-times{position:relative;z-index:2;display:flex;justify-content:space-between;width:100%;font-family:var(--font-mono);font-size:10px;color:var(--on-surface-variant);padding:0 8px;}
+.hero-note{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--on-surface-variant);font-weight:500;margin-top:20px;}
+
+/* ---------- Sections ---------- */
+section{padding:96px 24px;}
+.eyebrow{color:var(--primary);font-family:var(--font-display);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.2em;margin-bottom:12px;}
+h2.section-title{font-family:var(--font-display);font-size:clamp(26px,3vw,32px);font-weight:700;color:#fff;line-height:1.2;}
+h2.section-title .accent{color:var(--primary);}
+.section-sub{font-size:14px;color:var(--on-surface-variant);margin-top:8px;}
+
+#converter-section{background:var(--surface-container-lowest);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);}
+.converter-head{text-align:center;margin-bottom:48px;}
+
+/* Converter card */
+.converter-box{border-radius:24px;padding:40px;position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.03);}
+.admin-gear{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.05);border:none;color:rgba(255,255,255,.15);
+  padding:8px;border-radius:10px;transition:.2s;z-index:10;}
+.admin-gear:hover{color:var(--primary);transform:scale(1.1);}
+.mode-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:32px;}
+@media (min-width:768px){.mode-grid{grid-template-columns:repeat(4,1fr);}}
+.mode-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px;border-radius:16px;border:1px solid rgba(255,255,255,.05);
+  background:transparent;color:var(--on-surface-variant);transition:.2s;}
+.mode-btn:hover{background:rgba(255,255,255,.05);}
+.mode-btn.active{border-color:var(--primary);background:rgba(0,228,121,.1);color:var(--primary);}
+.mode-btn .t{font-size:14px;font-weight:700;}
+.mode-btn .s{font-size:10px;opacity:.6;}
+.conv-box{background:rgba(29,32,35,.5);border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,.05);}
+.conv-row-label{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--on-surface-variant);
+  text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;}
+.conv-io{display:flex;align-items:center;gap:16px;}
+.conv-io input[type=number]{background:transparent;border:none;font-size:24px;font-family:var(--font-display);font-weight:700;color:#fff;
+  width:100%;outline:none;}
+.conv-io input[type=number]:read-only{color:var(--primary);}
+.currency-chip{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.08);padding:10px 16px;
+  border-radius:12px;display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;white-space:nowrap;}
+.swap-btn{width:40px;height:40px;border-radius:999px;background:var(--primary);color:var(--on-secondary);display:flex;align-items:center;
+  justify-content:center;margin:-8px auto;position:relative;z-index:5;border:none;box-shadow:0 10px 20px rgba(0,0,0,.3);transition:transform .3s;}
+.swap-btn:hover{transform:rotate(180deg);}
+.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center;margin-top:32px;}
+.detail-cell{padding:12px;background:rgba(255,255,255,.05);border-radius:14px;border:1px solid rgba(255,255,255,.05);}
+.detail-cell .l{font-size:10px;color:var(--on-surface-variant);text-transform:uppercase;margin-bottom:4px;}
+.detail-cell .v{font-size:12px;font-weight:700;color:#fff;}
+.submit-btn{width:100%;background:var(--primary);color:var(--on-secondary);font-family:var(--font-display);font-weight:700;
+  padding:20px;border-radius:16px;margin-top:32px;border:none;font-size:15px;display:flex;align-items:center;justify-content:center;
+  gap:8px;transition:transform .2s,box-shadow .2s;}
+.submit-btn:hover{transform:scale(1.02);box-shadow:0 10px 25px rgba(0,228,121,.2);}
+.submit-btn:active{transform:scale(.98);}
+
+/* Services grid */
+.services-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:64px;}
+.services-head p{max-width:360px;font-size:14px;color:var(--on-surface-variant);line-height:1.7;}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}
+.service-card{padding:32px;border-radius:24px;}
+.service-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+  background:rgba(0,228,121,.1);color:var(--primary);transition:transform .2s;}
+.service-card:hover .service-icon{transform:scale(1.1);}
+.service-card h3{font-family:var(--font-display);font-size:18px;font-weight:700;color:#fff;margin:0 0 8px;}
+.service-card p{font-size:12px;color:var(--on-surface-variant);line-height:1.7;margin:0 0 24px;}
+.service-link{color:var(--primary);font-size:12px;font-weight:700;display:inline-flex;align-items:center;gap:6px;}
+
+/* Why us */
+#why-section{background:var(--surface-container-low);border-top:1px solid rgba(255,255,255,.05);border-bottom:1px solid rgba(255,255,255,.05);}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:1280px;margin:0 auto;}
+@media (max-width:1024px){.why-grid{grid-template-columns:1fr;}}
+.why-copy p{font-size:14px;color:var(--on-surface-variant);line-height:1.8;margin:16px 0 40px;max-width:520px;}
+.big-stat{padding:32px;border-radius:24px;display:inline-block;}
+.big-stat .n{font-family:var(--font-display);font-size:36px;font-weight:700;color:var(--primary);margin-bottom:4px;}
+.big-stat .t{color:#fff;font-weight:700;font-size:14px;margin-bottom:8px;}
+.why-feature-list{display:flex;flex-direction:column;gap:16px;}
+.why-feature{display:flex;align-items:center;gap:20px;padding:24px;border-radius:20px;border:1px solid rgba(255,255,255,.05);}
+.why-feature .fi{background:var(--surface);padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.05);flex-shrink:0;}
+.why-feature h4{font-size:14px;font-weight:700;color:#fff;margin:0 0 4px;}
+.why-feature p{font-size:12px;color:var(--on-surface-variant);margin:0;}
+
+/* Steps */
+.steps-head{text-align:center;margin-bottom:64px;}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center;}
+.step{display:flex;flex-direction:column;align-items:center;}
+.step-num{width:56px;height:56px;border-radius:999px;background:var(--surface);border:2px solid var(--primary);display:flex;
+  align-items:center;justify-content:center;color:var(--primary);font-family:var(--font-display);font-weight:700;margin-bottom:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.3);transition:transform .2s;}
+.step:hover .step-num{transform:scale(1.1);}
+.step h4{font-size:14px;font-weight:700;color:#fff;margin:0 0 4px;}
+.step p{font-size:12px;color:var(--on-surface-variant);line-height:1.7;max-width:220px;margin:0;}
+
+/* Testimonials */
+#testimonials-section{background:var(--surface-container-lowest);border-top:1px solid rgba(255,255,255,.05);}
+.testi-head{text-align:center;margin-bottom:64px;}
+.testi-card{padding:32px;border-radius:24px;border:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;justify-content:space-between;}
+.testi-card p{color:#fff;font-style:italic;font-size:13px;line-height:1.7;margin:0 0 24px;font-weight:500;}
+.testi-person{display:flex;align-items:center;gap:14px;}
+.testi-avatar{width:40px;height:40px;border-radius:999px;object-fit:cover;border:1px solid rgba(0,228,121,.3);}
+.testi-name{font-weight:700;color:#fff;font-size:12px;}
+.testi-role{font-size:10px;color:var(--on-surface-variant);}
+
+/* Callback form */
+.callback-box{padding:48px;border-radius:32px;position:relative;box-shadow:0 30px 60px rgba(0,0,0,.3);}
+.callback-head{text-align:center;margin-bottom:32px;}
+.callback-head h2{font-family:var(--font-display);font-size:clamp(22px,3vw,28px);font-weight:700;color:#fff;margin:0;line-height:1.3;}
+.callback-head p{font-size:14px;color:var(--on-surface-variant);margin-top:8px;max-width:440px;margin-left:auto;margin-right:auto;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media (max-width:640px){.form-grid{grid-template-columns:1fr;}}
+.form-field{margin-bottom:20px;}
+.form-field label{font-size:11px;font-weight:500;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.05em;
+  margin-left:4px;display:block;margin-bottom:6px;font-family:var(--font-display);}
+.form-field input, .form-field select{
+  width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:14px 16px;
+  color:#fff;font-size:14px;outline:none;transition:border-color .2s;font-family:inherit;
+}
+.form-field input::placeholder{color:rgba(255,255,255,.2);}
+.form-field input:focus, .form-field select:focus{border-color:var(--primary);}
+.form-error{display:flex;align-items:center;gap:8px;color:#f87171;font-size:12px;justify-content:center;margin-top:8px;}
+.contact-quicklinks{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);margin-top:32px;}
+.quicklink{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);text-decoration:none;text-align:center;transition:.2s;}
+.quicklink:hover{background:rgba(255,255,255,.1);}
+.quicklink .ql-label{font-size:9px;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.05em;}
+.quicklink .ql-value{font-size:12px;font-weight:700;color:#fff;font-family:var(--font-mono);}
+
+/* Compliance */
+.compliance-section{padding:48px 24px;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);background:var(--surface);}
+.compliance-grid{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;}
+.compliance-item{display:flex;gap:16px;align-items:flex-start;}
+.compliance-item h5{font-size:14px;font-weight:700;color:#fff;margin:0 0 4px;}
+.compliance-item p{font-size:12px;color:var(--on-surface-variant);margin:0;line-height:1.6;}
+
+/* Footer */
+footer{background:#0c0e12;padding-top:80px;padding-bottom:40px;border-top:1px solid rgba(255,255,255,.1);position:relative;z-index:30;}
+.footer-grid{max-width:1280px;margin:0 auto;padding:0 24px 64px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:48px;}
+.footer-grid h4{font-family:var(--font-display);font-weight:700;color:#fff;margin:0 0 24px;text-transform:uppercase;letter-spacing:.1em;font-size:12px;}
+.footer-grid p{font-size:12px;color:var(--on-surface-variant);line-height:1.7;}
+.footer-grid ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+.footer-grid ul a{color:var(--on-surface-variant);text-decoration:none;font-size:12px;transition:color .2s;}
+.footer-grid ul a:hover{color:var(--primary);}
+.footer-social{display:flex;gap:12px;margin-top:20px;}
+.footer-social span{width:32px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;
+  justify-content:center;color:var(--on-surface-variant);cursor:pointer;transition:color .2s;}
+.footer-social span:hover{color:var(--primary);}
+.city-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:12px;color:var(--on-surface-variant);font-family:var(--font-mono);}
+.footer-bottom{max-width:1280px;margin:0 auto;padding:32px 24px 0;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;
+  gap:16px;justify-content:space-between;align-items:center;font-size:10px;color:rgba(255,255,255,.4);}
+.footer-bottom .links{display:flex;gap:16px;}
+.footer-bottom a{color:inherit;text-decoration:none;}
+.footer-bottom a:hover{color:var(--primary);}
+
+/* ---------- Modals ---------- */
+.modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);
+  display:none;align-items:center;justify-content:center;padding:16px;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:rgba(255,255,255,.03);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);
+  border-radius:24px;padding:32px;max-width:440px;width:100%;box-shadow:0 30px 60px rgba(0,0,0,.5);position:relative;
+  max-height:88vh;overflow-y:auto;}
+.modal-box.wide{max-width:480px;}
+.modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--on-surface-variant);
+  padding:6px;border-radius:8px;font-size:18px;}
+.modal-close:hover{color:#fff;}
+.modal-icon-circle{width:64px;height:64px;background:rgba(0,228,121,.1);border:1px solid rgba(0,228,121,.25);border-radius:999px;
+  display:flex;align-items:center;justify-content:center;margin:0 auto 24px;color:var(--primary);}
+.modal-title{font-family:var(--font-display);font-size:22px;font-weight:700;color:#fff;margin:0 0 8px;text-align:center;}
+.modal-sub{font-size:13px;color:var(--on-surface-variant);text-align:center;margin:0 0 24px;line-height:1.6;}
+.modal-btns{display:flex;gap:16px;}
+.modal-btns button{flex:1;padding:14px;border-radius:12px;font-weight:700;font-size:13px;border:none;}
+.modal-btn-secondary{background:rgba(255,255,255,.05);color:#fff;}
+.modal-btn-secondary:hover{background:rgba(255,255,255,.1);}
+.modal-btn-primary{background:var(--primary);color:var(--on-secondary);box-shadow:0 10px 20px rgba(0,228,121,.2);}
+.modal-btn-primary:hover{transform:scale(1.02);}
+.summary-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:16px;
+  font-size:13px;margin-bottom:24px;display:flex;flex-direction:column;gap:10px;}
+.summary-row{display:flex;justify-content:space-between;}
+.summary-row span:first-child{color:var(--on-surface-variant);}
+.summary-row span:last-child{color:#fff;font-weight:700;text-align:right;}
+.receipt-mono{background:var(--surface);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:16px;
+  font-family:var(--font-mono);font-size:12px;color:var(--on-surface-variant);display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.receipt-mono .row{display:flex;justify-content:space-between;}
+.receipt-mono .row span:last-child{color:#fff;}
+.receipt-mono .divider{border-top:1px dashed rgba(255,255,255,.1);padding-top:10px;}
+.pin-row{display:flex;justify-content:center;gap:12px;margin:32px 0;}
+.pin-row input{width:48px;height:64px;text-align:center;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;font-size:22px;font-family:var(--font-display);font-weight:700;color:var(--primary);outline:none;}
+.pin-row input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,228,121,.15);}
+.processing-overlay{position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);
+  display:none;flex-direction:column;align-items:center;justify-content:center;}
+.processing-overlay.open{display:flex;}
+.spin-ring{width:80px;height:80px;position:relative;margin-bottom:24px;}
+.spin-ring::before{content:'';position:absolute;inset:0;border-radius:999px;border:4px solid rgba(0,228,121,.2);animation:pulse 1.6s infinite;}
+.spin-ring::after{content:'';position:absolute;inset:0;border-radius:999px;border-top:4px solid var(--primary);
+  border-right:4px solid var(--primary);border-bottom:4px solid transparent;border-left:4px solid transparent;animation:spin .9s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.processing-overlay h3{font-family:var(--font-display);font-size:22px;font-weight:700;color:#fff;margin:0 0 8px;}
+.processing-overlay p{font-size:13px;color:var(--on-surface-variant);max-width:280px;text-align:center;animation:pulse 1.6s infinite;}
+
+/* ---------- Dashboard (Trader Portfolio) ---------- */
+.dashboard{max-width:1280px;margin:0 auto;padding:110px 24px 60px;display:none;flex-direction:column;gap:24px;text-align:left;}
+@media(min-width:900px){.dashboard{flex-direction:row;}}
+.dashboard.active{display:flex;}
+.sidebar{width:100%;flex-shrink:0;display:flex;flex-direction:column;gap:24px;}
+@media(min-width:900px){.sidebar{width:260px;}}
+.profile-mini{padding:16px;border-radius:16px;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.15);}
+.profile-mini img{width:40px;height:40px;border-radius:999px;object-fit:cover;border:1px solid rgba(0,228,121,.45);}
+.profile-mini h4{font-size:12px;font-weight:700;color:#fff;margin:0;line-height:1.3;}
+.profile-mini .badge{font-size:9px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.05em;}
+.sidebar-nav{border-radius:16px;padding:8px;display:flex;flex-direction:column;gap:4px;}
+.sidebar-nav button{width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:12px;font-size:12px;
+  font-weight:600;background:none;border:none;color:var(--on-surface-variant);text-align:left;transition:.2s;}
+.sidebar-nav button:hover{background:rgba(255,255,255,.05);color:#fff;}
+.sidebar-nav button.active{background:rgba(0,228,121,.08);color:var(--primary);border-right:4px solid var(--primary);}
+.pro-cta{padding:20px;border-radius:16px;border:1px solid rgba(0,228,121,.2);background:rgba(0,228,121,.05);position:relative;}
+.pro-cta h5{color:#fff;font-weight:700;font-size:12px;margin:0 0 4px;}
+.pro-cta p{font-size:10px;color:var(--on-surface-variant);line-height:1.6;margin:0 0 16px;}
+.pro-cta button{width:100%;padding:10px;background:var(--primary);color:#000;font-weight:700;font-size:10px;
+  text-transform:uppercase;letter-spacing:.05em;border-radius:10px;border:none;}
+.sidebar-links{display:flex;flex-direction:column;gap:4px;padding:0 8px;font-size:12px;}
+.sidebar-links button{display:flex;align-items:center;gap:10px;padding:8px 0;background:none;border:none;color:var(--on-surface-variant);
+  text-align:left;}
+.sidebar-links button:hover{color:#fff;}
+.sidebar-links button.danger{color:#f87171;}
+.sidebar-links button.danger:hover{color:#fca5a5;}
+
+.dash-main{flex:1;display:flex;flex-direction:column;gap:32px;min-width:0;}
+.dash-header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;
+  border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:24px;}
+.dash-header h1{font-family:var(--font-display);font-size:26px;font-weight:700;color:#fff;margin:0;}
+.dash-header p{font-size:12px;color:var(--on-surface-variant);margin:4px 0 0;}
+.dash-header-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-glass-sm{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:#fff;font-size:12px;font-weight:700;
+  padding:10px 16px;border-radius:12px;display:flex;align-items:center;gap:8px;}
+.btn-glass-sm:hover{background:rgba(255,255,255,.1);}
+.btn-primary-sm{background:var(--primary);color:#000;font-size:12px;font-weight:700;padding:10px 16px;border-radius:12px;border:none;
+  display:flex;align-items:center;gap:8px;box-shadow:0 10px 20px rgba(0,228,121,.25);}
+.bento{display:grid;grid-template-columns:1fr;gap:24px;}
+@media(min-width:1024px){.bento{grid-template-columns:2fr 1fr;}}
+.bento-left, .bento-right{display:flex;flex-direction:column;gap:24px;min-width:0;}
+
+.identity-card{border-radius:24px;padding:32px;}
+.identity-top{display:flex;flex-wrap:wrap;gap:24px;align-items:center;}
+.identity-avatar{position:relative;flex-shrink:0;}
+.identity-avatar img{width:96px;height:96px;border-radius:20px;object-fit:cover;border:2px solid var(--primary);box-shadow:0 10px 25px rgba(0,0,0,.4);}
+.identity-avatar .check{position:absolute;bottom:-8px;right:-8px;background:var(--primary);color:#000;border-radius:10px;padding:6px;
+  border:4px solid var(--surface);}
+.identity-fields{flex:1;min-width:220px;display:grid;grid-template-columns:1fr 1fr;gap:16px 32px;}
+.identity-fields label{font-size:9px;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:4px;}
+.identity-fields .v{font-family:var(--font-display);font-size:16px;font-weight:700;color:#fff;}
+.identity-fields .v.mono{font-family:var(--font-mono);color:var(--primary);font-size:13px;}
+.identity-fields .v.small{font-size:12px;font-family:var(--font-sans);font-weight:400;color:#fff;}
+.identity-actions{padding-top:16px;border-top:1px solid rgba(255,255,255,.05);display:flex;gap:16px;font-size:12px;font-weight:600;
+  margin-top:16px;width:100%;}
+.identity-actions button{background:none;border:none;color:var(--secondary);display:flex;align-items:center;gap:6px;}
+.identity-actions button:last-child{color:var(--on-surface-variant);}
+.identity-edit-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;}
+@media(max-width:600px){.identity-edit-grid{grid-template-columns:1fr;}}
+.identity-edit-grid input{width:100%;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px 14px;
+  color:#fff;font-size:12px;outline:none;}
+.identity-edit-grid input:read-only{background:rgba(0,0,0,.2);color:var(--on-surface-variant);font-family:var(--font-mono);border-color:rgba(255,255,255,.05);}
+.identity-edit-actions{display:flex;gap:12px;margin-top:16px;width:100%;}
+.identity-edit-actions button{padding:10px 18px;border-radius:10px;font-size:12px;font-weight:700;border:none;}
+.identity-edit-actions .cancel{background:rgba(255,255,255,.05);color:#fff;}
+.identity-edit-actions .save{background:var(--primary);color:#000;}
+
+.tab-content-box{border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:20px;}
+.tab-content-box h3{font-family:var(--font-display);font-size:16px;font-weight:700;color:#fff;margin:0;}
+.rate-tile{background:rgba(0,0,0,.3);padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,.05);}
+.rate-tile .l{font-size:10px;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.05em;font-weight:600;}
+.rate-tile .v{font-family:var(--font-display);font-size:22px;font-weight:700;color:var(--primary);margin:4px 0 8px;}
+.rate-tile .d{font-size:10px;color:var(--on-surface-variant);line-height:1.6;}
+.callout{padding:14px;border-radius:14px;font-size:12px;display:flex;align-items:center;gap:10px;}
+.callout.green{background:rgba(0,228,121,.05);border:1px solid rgba(0,228,121,.15);color:var(--primary);}
+.wallet-row{background:rgba(0,0,0,.3);padding:16px;border-radius:14px;border:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;align-items:center;}
+.wallet-row .name{font-size:12px;font-weight:700;color:#fff;}
+.wallet-row .addr{font-size:10px;color:var(--on-surface-variant);font-family:var(--font-mono);margin-top:2px;}
+.wallet-badge{font-size:10px;font-weight:700;padding:2px 10px;border-radius:999px;}
+.wallet-badge.active{background:rgba(0,228,121,.1);color:var(--primary);border:1px solid rgba(0,228,121,.2);}
+.wallet-badge.inactive{background:rgba(255,255,255,.05);color:var(--on-surface-variant);border:1px solid rgba(255,255,255,.1);}
+
+/* History table */
+.history-box{border-radius:20px;overflow:hidden;}
+.history-head{padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;
+  justify-content:space-between;align-items:center;gap:16px;background:rgba(255,255,255,.05);}
+.history-head h3{font-family:var(--font-display);font-size:16px;font-weight:700;color:#fff;margin:0;display:flex;align-items:center;gap:8px;}
+.history-controls{display:flex;gap:8px;flex-wrap:wrap;}
+.search-wrap{position:relative;}
+.search-wrap input{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:7px 14px 7px 30px;
+  font-size:12px;color:#fff;outline:none;width:170px;}
+.search-wrap .si{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--on-surface-variant);font-size:12px;}
+.history-controls select{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:7px 12px;
+  font-size:12px;color:#fff;outline:none;}
+.history-table-wrap{overflow-x:auto;}
+table.history-table{width:100%;border-collapse:collapse;text-align:left;}
+table.history-table thead{background:rgba(255,255,255,.05);}
+table.history-table th{font-family:var(--font-display);font-size:10px;color:var(--on-surface-variant);text-transform:uppercase;
+  letter-spacing:.1em;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.1);white-space:nowrap;}
+table.history-table td{padding:14px 20px;font-size:13px;border-bottom:1px solid rgba(255,255,255,.05);white-space:nowrap;}
+table.history-table tr:hover td{background:rgba(255,255,255,.03);}
+.tx-type-chip{background:rgba(255,255,255,.05);padding:4px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.05);font-size:11px;}
+.status-chip{padding:3px 8px;border-radius:6px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;}
+.status-chip.completed{background:rgba(0,228,121,.1);color:var(--primary);}
+.status-chip.pending{background:rgba(245,158,11,.1);color:var(--amber);}
+.status-chip.rejected{background:rgba(248,113,113,.1);color:#f87171;}
+.info-btn{background:none;border:none;color:var(--on-surface-variant);padding:6px;border-radius:8px;}
+.info-btn:hover{background:rgba(0,228,121,.1);color:var(--primary);}
+.empty-row{text-align:center;padding:48px;color:var(--on-surface-variant);font-size:13px;}
+
+/* Referral widget */
+.referral-box{border-radius:16px;padding:24px;position:relative;overflow:hidden;}
+.referral-box h3{font-family:var(--font-display);font-size:14px;font-weight:700;color:#fff;margin:0 0 16px;display:flex;align-items:center;gap:8px;}
+.code-box{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:14px;margin-bottom:16px;}
+.code-box label{font-size:10px;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:6px;}
+.code-row{display:flex;align-items:center;gap:8px;}
+.code-row code{flex:1;font-family:var(--font-mono);font-size:12px;color:var(--secondary);background:rgba(0,0,0,.25);
+  padding:8px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.05);font-weight:600;}
+.code-row button{background:rgba(255,255,255,.05);color:#fff;border:none;padding:10px;border-radius:8px;font-size:12px;font-weight:700;}
+.code-row button.copied{background:var(--primary);color:#000;}
+.ref-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+.ref-stat{padding:14px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);text-align:center;}
+.ref-stat .n{font-family:var(--font-display);font-size:20px;font-weight:700;}
+.ref-stat .l{font-size:10px;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
+.progress-bar-wrap{width:100%;background:rgba(255,255,255,.05);height:8px;border-radius:999px;overflow:hidden;margin-top:12px;}
+.progress-bar{height:100%;background:var(--primary);border-radius:999px;transition:width .5s;}
+.ref-note{font-size:10px;color:var(--on-surface-variant);text-align:center;margin-top:10px;}
+
+.admin-panel-card{border-radius:16px;padding:24px;border-left:4px solid var(--amber);}
+.admin-panel-card h3{font-family:var(--font-display);font-size:14px;font-weight:700;color:#fff;margin:0 0 12px;display:flex;align-items:center;gap:8px;}
+.admin-panel-card p{font-size:12px;color:var(--on-surface-variant);line-height:1.7;margin:0 0 24px;}
+.unlock-btn{width:100%;padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;
+  color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;}
+.unlock-btn:hover{background:rgba(255,255,255,.1);}
+.danger-box{border-radius:16px;padding:24px;border:1px solid rgba(248,113,113,.2);background:rgba(248,113,113,.05);}
+.danger-box h3{font-size:11px;font-weight:700;color:#f87171;text-transform:uppercase;letter-spacing:.1em;margin:0 0 6px;}
+.danger-box p{font-size:11px;color:var(--on-surface-variant);line-height:1.7;margin:0 0 16px;}
+.danger-btn{width:100%;padding:11px;background:transparent;border:1px solid rgba(248,113,113,.3);color:#f87171;font-size:12px;
+  font-weight:700;border-radius:12px;}
+.danger-btn:hover{background:#f87171;color:#000;}
+
+.hidden{display:none!important;}
+svg.icon{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;}
+
+@media(max-width:640px){
+  section{padding:64px 20px;}
+  .callback-box{padding:28px 20px;}
+  .identity-fields{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="navbar" id="navbar">
+  <div class="container nav-inner">
+    <div class="logo" onclick="setPortal('PUBLIC')">
+      <div class="logo-mark">T</div>
+      <span class="logo-text">TrustFX</span>
+    </div>
+    <div class="nav-links">
+      <button id="nav-markets" class="active" onclick="setPortal('PUBLIC'); scrollToId('home');">Markets</button>
+      <button onclick="setPortal('PUBLIC'); scrollToId('converter-section');">Convert</button>
+      <button id="nav-portfolio" onclick="setPortal('TRADER'); setTab('ANALYTICS');">Portfolio</button>
+      <button onclick="setPortal('TRADER'); setTab('DASHBOARD');">History</button>
+    </div>
+    <div class="nav-ctas">
+      <button class="btn-link" id="login-btn" onclick="setPortal('TRADER')">Login</button>
+      <button class="btn-primary" onclick="tradeNow()">Trade Now</button>
+    </div>
+    <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button onclick="closeMobileAnd(()=>{setPortal('PUBLIC');})">Markets</button>
+  <button onclick="closeMobileAnd(()=>{setPortal('PUBLIC'); scrollToId('converter-section');})">Convert</button>
+  <button onclick="closeMobileAnd(()=>{setPortal('TRADER'); setTab('ANALYTICS');})">Portfolio Dashboard</button>
+  <div class="mobile-cta-row">
+    <button onclick="closeMobileAnd(()=>setPortal('TRADER'))">Login</button>
+    <button class="primary" onclick="closeMobileAnd(()=>tradeNow())">Trade Now</button>
+  </div>
+</div>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker-wrap" style="margin-top:70px;">
+  <div class="ticker-content" id="tickerContent"></div>
+</div>
+
+<!-- ============ PUBLIC PORTAL ============ -->
+<div id="publicPortal">
+
+  <section class="hero" id="home">
+    <div class="hero-glow"></div>
+    <div class="hero-grid">
+      <div>
+        <div class="pill"><span class="dot"></span>Live Market Active</div>
+        <h1 class="hero-title">INDIA'S<br><span class="accent">HIGHEST VELOCITY</span><br>FOREX.</h1>
+        <p class="hero-copy">Convert USD • INR with precision-engineered rates, zero hidden fees, and lightning-fast settlement. Trusted by 12,000+ traders, freelancers, and businesses across India.</p>
+        <div class="hero-btns">
+          <button class="btn-hero" onclick="scrollToId('converter-section')">Convert Now →</button>
+          <button class="btn-outline" onclick="scrollToId('contact-section')">Contact Dealer</button>
+        </div>
+        <div class="hero-stats">
+          <div><div class="num">₹500Cr+</div><div class="label">Daily Volume</div></div>
+          <div><div class="num">12,000+</div><div class="label">Happy Clients</div></div>
+          <div><div class="num">99.8%</div><div class="label">Beat Rate</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="hero-card glass">
+          <div class="hero-card-top">
+            <div><div class="label">Today's Volume</div><div class="value">₹50,32,000</div></div>
+            <div class="icon-box">📈</div>
+          </div>
+          <div class="spark-row"><span>USDT / INR Live Trend</span><span id="heroUsdtRate" style="color:var(--primary);font-weight:700;font-family:var(--font-mono);"></span></div>
+          <div class="spark-chart">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+              <path d="M 0 80 Q 20 40, 40 65 T 80 25 T 100 5 L 100 100 L 0 100 Z" fill="rgba(0,228,121,0.06)"/>
+              <path d="M 0 80 Q 20 40, 40 65 T 80 25 T 100 5" fill="none" stroke="#00e479" stroke-width="2"/>
+            </svg>
+            <div class="spark-times"><span>09:00 AM</span><span>03:00 PM</span></div>
+          </div>
+          <div class="hero-note">✨ Average transaction completes in 4 mins 23 secs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="converter-section">
+    <div class="container-md">
+      <div class="converter-head">
+        <div class="pill" style="margin:0 auto 12px;"><span class="dot"></span>Live Rates Syncing</div>
+        <h2 class="section-title">Precision <span class="accent">Converter</span></h2>
+        <p class="section-sub">Choose your transaction mode and get a locked live rate.</p>
+      </div>
+
+      <div class="converter-box glass">
+        <button class="admin-gear" title="Administrative Rates Panel" onclick="openAdmin()">⚙</button>
+
+        <div class="mode-grid">
+          <button class="mode-btn active" data-type="SELL_USDT" onclick="setConvType('SELL_USDT')"><span class="t">Sell USDT</span><span class="s">USDT → INR</span></button>
+          <button class="mode-btn" data-type="BUY_USDT" onclick="setConvType('BUY_USDT')"><span class="t">Buy USDT</span><span class="s">INR → USDT</span></button>
+          <button class="mode-btn" data-type="USD_TO_INR" onclick="setConvType('USD_TO_INR')"><span class="t">USD to INR</span><span class="s">USD → INR</span></button>
+          <button class="mode-btn" data-type="INR_TO_USD" onclick="setConvType('INR_TO_USD')"><span class="t">INR to USD</span><span class="s">INR → USD</span></button>
+        </div>
+
+        <div class="conv-box">
+          <div class="conv-row-label"><span>You Send</span><span id="sendRateLabel">Rate: ₹0.00</span></div>
+          <div class="conv-io">
+            <input type="number" id="sendValue" value="1000" oninput="recalcConverter()">
+            <div class="currency-chip" id="sendCurrencyChip">USDT</div>
+          </div>
+        </div>
+
+        <div class="swap-btn" onclick="swapConvType()">⇅</div>
+
+        <div class="conv-box">
+          <div class="conv-row-label"><span>You Receive</span><span id="feeLabel">Service Fee: 0.2%</span></div>
+          <div class="conv-io">
+            <input type="number" id="receiveValue" readonly value="0">
+            <div class="currency-chip" id="receiveCurrencyChip">INR</div>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-cell"><div class="l">Buy Spread</div><div class="v">0.15%</div></div>
+          <div class="detail-cell"><div class="l">Guaranteed Rate</div><div class="v">5 Mins Max</div></div>
+          <div class="detail-cell"><div class="l">Settlement</div><div class="v">Instant API</div></div>
+        </div>
+
+        <button class="submit-btn" id="convSubmitBtn" onclick="startTransaction()">⚡ Start Sell USDT Transaction</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="services-head">
+        <div>
+          <div class="eyebrow">Our Services</div>
+          <h2 class="section-title">Everything You Need<br><span class="accent">In One Platform</span></h2>
+        </div>
+        <p>From single transactions to enterprise-grade FX custom hedging solutions, TrustFX handles it with absolute velocity.</p>
+      </div>
+      <div class="grid-3">
+        <div class="service-card glass-card">
+          <div class="service-icon">🪙</div>
+          <h3>USD → INR Conversion</h3>
+          <p>Convert your US Dollars to Indian Rupees at live interbank rates. Perfect for freelancers and NRIs.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+        <div class="service-card glass-card">
+          <div class="service-icon" style="background:rgba(60,215,255,.1);color:var(--secondary);">👛</div>
+          <h3>INR → USD Conversion</h3>
+          <p>Send INR and receive USD seamlessly. Ideal for importers, global travelers, and international business payments.</p>
+          <span class="service-link" style="color:var(--secondary);">Learn More →</span>
+        </div>
+        <div class="service-card glass-card">
+          <div class="service-icon">📊</div>
+          <h3>Forex Trading Support</h3>
+          <p>Expert support for active forex traders. Get dedicated rate locks, custom margin guidance, and rapid settlement.</p>
+          <span class="service-link">Learn More →</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-section">
+    <div class="why-grid">
+      <div class="why-copy">
+        <div class="eyebrow">Why TrustFX</div>
+        <h2 class="section-title">Built on Absolute Trust.<br><span class="accent">Backed by Live Results.</span></h2>
+        <p>Since 2019, TrustFX has processed over ₹500 crore in currency conversions with an outstanding 99.8% satisfaction rate. We don't just move money — we execute it with unparalleled velocity.</p>
+        <div class="big-stat glass">
+          <div class="n">₹500Cr+</div>
+          <div class="t">Total Volume Processed</div>
+          <div style="display:flex;align-items:center;gap:8px;color:var(--primary);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;">
+            <span class="dot"></span> Active &amp; Securing
+          </div>
+        </div>
+      </div>
+      <div class="why-feature-list">
+        <div class="why-feature glass">
+          <div class="fi">🛡️</div>
+          <div><h4>100% Secure Transactions</h4><p>Bank-grade 256-bit encryption secures every routing and transfer.</p></div>
+        </div>
+        <div class="why-feature glass">
+          <div class="fi" style="color:var(--secondary);">📈</div>
+          <div><h4>Best Market Spreads</h4><p>We source directly from interbank markets, passing optimal value to you.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align:center;">
+      <div class="steps-head">
+        <div class="eyebrow">The Process</div>
+        <h2 class="section-title">4 Steps to <span class="accent">Complete Conversion</span></h2>
+      </div>
+      <div class="steps-grid">
+        <div class="step"><div class="step-num">01</div><h4>Submit Request</h4><p>Fill our simple callback form with your expected conversion amount.</p></div>
+        <div class="step"><div class="step-num">02</div><h4>Get Live Quote</h4><p>Our dealer rings you back in under 15 minutes with a locked priority rate.</p></div>
+        <div class="step"><div class="step-num">03</div><h4>Confirm Transaction</h4><p>Accept the verified rate and transfer your funds securely.</p></div>
+        <div class="step"><div class="step-num">04</div><h4>Receive Sum</h4><p>Converted INR or USD lands securely in your account within minutes.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials-section">
+    <div class="container">
+      <div class="testi-head">
+        <div class="eyebrow">Client Voices</div>
+        <h2 class="section-title">12,000+ Happy <span class="accent">Conversions Done</span></h2>
+      </div>
+      <div class="grid-3">
+        <div class="testi-card glass">
+          <p>"Converted $1000 from my US client — got ₹1.10 more per dollar than my standard bank rate. The entire process took under 5 minutes. Brilliant!"</p>
+          <div class="testi-person">
+            <div class="testi-avatar" style="background:#233;display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:700;">AM</div>
+            <div><div class="testi-name">Arjun Mehta</div><div class="testi-role">Freelance Developer, Mumbai</div></div>
+          </div>
+        </div>
+        <div class="testi-card glass">
+          <p>"Sold 500 USDT last week. The rate was amazing and the instant WhatsApp support replied in seconds. I'll never go back to my traditional bank."</p>
+          <div class="testi-person">
+            <div class="testi-avatar" style="background:#233;display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:700;">PS</div>
+            <div><div class="testi-name">Priya Sharma</div><div class="testi-role">UI Designer, Bengaluru</div></div>
+          </div>
+        </div>
+        <div class="testi-card glass">
+          <p>"Highly secure. I convert roughly $700 every month. TrustFX is incredibly consistent, and their dedicated dealers lock the absolute best margins."</p>
+          <div class="testi-person">
+            <div class="testi-avatar" style="background:#233;display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:700;">VS</div>
+            <div><div class="testi-name">Vikram Singh</div><div class="testi-role">SaaS Founder, Pune</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact-section">
+    <div class="container-sm">
+      <div class="callback-box glass">
+        <div class="callback-head">
+          <div class="pill" style="margin:0 auto 12px;"><span class="dot"></span>Live Dealer Callback</div>
+          <h2>Start Your <span class="accent" style="color:var(--primary);">Conversion Now</span></h2>
+          <p>Our specialized dealers contact you within 15 minutes with locked priority rates.</p>
+        </div>
+        <form onsubmit="submitCallback(event)">
+          <div class="form-grid">
+            <div class="form-field"><label>Full Name</label><input type="text" id="cf-name" placeholder="e.g. Arjun Mehta"></div>
+            <div class="form-field"><label>Mobile Number</label><input type="tel" id="cf-phone" placeholder="e.g. +91 79044 30084"></div>
+          </div>
+          <div class="form-field"><label>Email Address</label><input type="email" id="cf-email" placeholder="e.g. you@example.com"></div>
+          <div class="form-grid">
+            <div class="form-field"><label>Expected Amount</label><input type="text" id="cf-amount" placeholder="e.g. $1,000 or ₹90,000"></div>
+            <div class="form-field"><label>Transaction Type</label>
+              <select id="cf-type">
+                <option>Sell USDT (Get INR)</option>
+                <option>Buy USDT (Pay INR)</option>
+                <option>USD to INR (Bank)</option>
+                <option>INR to USD (Global)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-error hidden" id="cf-error">⚠ Please fill in all the required fields.</div>
+          <button type="submit" class="submit-btn" id="cfSubmitBtn">Register Transaction Callback →</button>
+          <div class="contact-quicklinks">
+            <a href="tel:+917904430084" class="quicklink"><span>📞</span><span class="ql-label">Call Dealer</span><span class="ql-value">+91 79044 30084</span></a>
+            <a href="https://wa.me/917904430084" target="_blank" class="quicklink"><span>💬</span><span class="ql-label">WhatsApp</span><span class="ql-value">Chat Securely</span></a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="compliance-section" style="padding:48px 24px;">
+    <div class="compliance-grid">
+      <div class="compliance-item"><span style="font-size:28px;">🏛️</span><div><h5>RBI FEMA Guidelines</h5><p>Operating in fully verified compliance with FEMA and RBI forex regulations.</p></div></div>
+      <div class="compliance-item"><span style="font-size:28px;">🛡️</span><div><h5>Secure Custody API</h5><p>256-bit secure SSL encryption and multi-sig wallets protect your funds.</p></div></div>
+      <div class="compliance-item"><span style="font-size:28px;">✨</span><div><h5>No Hidden Markups</h5><p>Every rate margin is locked upfront before confirmation. Guaranteed.</p></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ TRADER DASHBOARD ============ -->
+<div class="dashboard" id="traderDashboard">
+  <aside class="sidebar">
+    <div class="profile-mini">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNA0xwd5xmUvhztwY5qSIQHxIWEdE31M2ZMG1vbQFSjDujSgvVkCsEUwmoB2x1hT5wZIVpz182r6SPdKD-5-CQh9ndALfJgaJZDT0AZvTe09H8mxFQMIuoxPgtx1qUuRgqNmBPycJBbiRlBu6s7XCAaEsFgQTqs3pdMyLpa5QrHRE5dkhHLoesdIw4sdFW2M2-7zJa2Ty4Cn5jln2R6XSWsQKe6CDs2yIEAp5YJOvWcibRdYcg9sI8ZmgniSd2m3zGHnn8ZN_ti87N" alt="avatar">
+      <div><h4 id="sbName">Alex Rivera</h4><span class="badge">Verified Trader</span></div>
+    </div>
+    <div class="sidebar-nav">
+      <button id="tab-ANALYTICS" onclick="setTab('ANALYTICS')">📊 Portfolio Analytics</button>
+      <button id="tab-DASHBOARD" onclick="setTab('DASHBOARD')">📁 Transaction History</button>
+      <button id="tab-EXCHANGES" onclick="setTab('EXCHANGES')">🪙 Live Market Spreads</button>
+      <button id="tab-WALLETS" onclick="setTab('WALLETS')">👛 Secure Wallets</button>
+      <button id="tab-SETTINGS" onclick="setTab('SETTINGS')">⚙ Identity Settings</button>
+    </div>
+    <div class="pro-cta">
+      <h5>Upgrade to Premium Pro</h5>
+      <p>Unlock direct API webhooks, bulk corporate discounts, and instant priority routing.</p>
+      <button onclick="alert('Redirecting to Premium Pro checkout...')">Upgrade Pro</button>
+    </div>
+    <div class="sidebar-links">
+      <button onclick="alert('Connecting live support chat...')">💬 Dedicated Support</button>
+      <button class="danger" onclick="setPortal('PUBLIC')">↩ Logout Dashboard</button>
+    </div>
+  </aside>
+
+  <div class="dash-main">
+    <div class="dash-header">
+      <div>
+        <h1>Trader Profile</h1>
+        <p>Manage your corporate credentials, referral bonuses, and locked rates settings.</p>
+      </div>
+      <div class="dash-header-btns">
+        <button class="btn-glass-sm" onclick="exportCSV()">⬇ Export CSV Logs</button>
+        <button class="btn-primary-sm" onclick="tradeNow()">+ New Conversion</button>
+      </div>
+    </div>
+
+    <div class="bento">
+      <div class="bento-left">
+        <div class="identity-card glass-card">
+          <div class="identity-top" id="identityView">
+            <div class="identity-avatar">
+              <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKD1jwsDQzUPdqV9h9tgdCN4JwfIS5KVVO4FfywScXb8kv4rsQVmXLCwBTRZ5LwJRZISV1xZS1dfhimKh651mtHF4KVMnrDFW8rzIy4Pejx2MLeKNmS78RepoYypygOMTPH9HvMkkjd5NMXEOOztPhfuxp0_0a6RDXzFYKgQ3jkZmI9bk4EEh_L-XGOz0eOfSOFt-9RdswEIm0pz3_P7N6hTJeJnkNi_qfYTGd-dxk7ZMUpIr8mj84QzOQ0xOkwSynIxZj_RDdI6Bt" alt="profile">
+              <span class="check">✓</span>
+            </div>
+            <div class="identity-fields" id="identityFields">
+              <div><label>Full Corporate Name</label><div class="v" id="fld-name">Alex Rivera</div></div>
+              <div><label>Trader ID</label><div class="v mono" id="fld-id">#TRFX-9982-K2</div></div>
+              <div><label>Contact Email</label><div class="v small" id="fld-email">a.rivera@private.trading</div></div>
+              <div><label>Location / Base Zone</label><div class="v small" id="fld-location">Singapore • UTC+8</div></div>
+            </div>
+            <div class="identity-actions">
+              <button onclick="editProfile()">✎ Edit Profile Info</button>
+              <button onclick="openAdmin()">🔒 Security Credentials</button>
+            </div>
+          </div>
+          <div class="identity-edit-grid hidden" id="identityEdit" style="align-items:center;">
+            <div><label style="font-size:9px;color:var(--on-surface-variant);text-transform:uppercase;display:block;margin-bottom:4px;">Full Corporate Name</label><input type="text" id="edit-name"></div>
+            <div><label style="font-size:9px;color:var(--on-surface-variant);text-transform:uppercase;display:block;margin-bottom:4px;">Trader Reference ID</label><input type="text" id="edit-id" readonly></div>
+            <div><label style="font-size:9px;color:var(--on-surface-variant);text-transform:uppercase;display:block;margin-bottom:4px;">Contact Email</label><input type="email" id="edit-email"></div>
+            <div><label style="font-size:9px;color:var(--on-surface-variant);text-transform:uppercase;display:block;margin-bottom:4px;">Location / Base Zone</label><input type="text" id="edit-location"></div>
+            <div class="identity-edit-actions" style="grid-column:1/-1;">
+              <button class="cancel" onclick="cancelEditProfile()">Cancel</button>
+              <button class="save" onclick="saveProfile()">Save Changes</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="tabContentArea"></div>
+      </div>
+
+      <div class="bento-right">
+        <div class="referral-box glass-card">
+          <h3>🎁 Referral Bonus</h3>
+          <div class="code-box">
+            <label>Your Unique Code</label>
+            <div class="code-row">
+              <code id="refCode">TRUST-ALEX-88X</code>
+              <button id="copyRefBtn" onclick="copyReferral()">📋</button>
+            </div>
+          </div>
+          <div class="ref-stats">
+            <div class="ref-stat"><div class="n" style="color:var(--primary);" id="refCount">12</div><div class="l">Referred</div></div>
+            <div class="ref-stat"><div class="n" style="color:var(--secondary);" id="refEarned">$450</div><div class="l">Earned</div></div>
+          </div>
+          <div class="progress-bar-wrap"><div class="progress-bar" id="refProgress" style="width:90%;"></div></div>
+          <p class="ref-note" id="refNote">$50 until next bonus payout</p>
+        </div>
+
+        <div class="admin-panel-card glass-card">
+          <h3>🛡️ Administrative Rates</h3>
+          <p>Configure custom spreads or change USD base rate overrides. This panel requires secondary security verification.</p>
+          <button class="unlock-btn" onclick="openAdmin()">🔓 Unlock Admin Panel</button>
+        </div>
+
+        <div class="danger-box">
+          <h3>Danger Zone</h3>
+          <p>Delete your trader identity, clean persistent cache, and wipe transaction logs permanently.</p>
+          <button class="danger-btn" onclick="deleteAccount()">Delete My Account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="logo" style="cursor:default;">
+        <div class="logo-mark" style="width:32px;height:32px;font-size:14px;">T</div>
+        <span class="logo-text" style="font-size:18px;">TrustFX</span>
+      </div>
+      <p style="margin-top:20px;">India's most trusted decentralized forex conversion platform. Serving 12,000+ clients across the country with precision rates and dedicated support.</p>
+      <div class="footer-social"><span>🏛️</span><span>🛡️</span><span>✨</span></div>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">USD/INR Conversion</a></li>
+        <li><a href="#">INR/USD Conversion</a></li>
+        <li><a href="#">Forex Trading Support</a></li>
+        <li><a href="#">Business Solutions</a></li>
+        <li><a href="#">Testimonials</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact Desk</h4>
+      <ul>
+        <li>📞 +91 79044 30084</li>
+        <li>💬 support@trustfx.in</li>
+        <li style="padding-top:12px;border-top:1px solid rgba(255,255,255,.05);">
+          <div style="font-family:var(--font-mono);font-size:10px;text-transform:uppercase;color:#fff;font-weight:600;margin-bottom:4px;">Operating Hours</div>
+          <div style="color:#fff;font-weight:700;">Mon - Sat: 9AM - 8PM</div>
+          <div style="color:#fff;font-weight:700;">Sun: 10AM - 4PM</div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h4>Pan-India Support</h4>
+      <div class="city-grid">
+        <span>Mumbai</span><span>Delhi</span><span>Bangalore</span><span>Hyderabad</span>
+        <span>Chennai</span><span>Pune</span><span>Surat</span><span>Kolkata</span>
+      </div>
+      <div style="margin-top:16px;color:var(--primary);font-weight:700;font-size:11px;">+ 480 more cities</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 TrustFX. Advanced Forex Trading Infrastructure. Licensed dealer under FEMA.</p>
+    <div class="links"><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Security Documentation</a></div>
+  </div>
+</footer>
+
+<!-- ============ MODALS ============ -->
+
+<!-- Confirm Transaction Modal -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box glass">
+    <h3 class="font-display" style="font-size:20px;font-weight:700;color:#fff;margin:0 0 8px;">ℹ Confirm Transaction</h3>
+    <p style="font-size:13px;color:var(--on-surface-variant);margin:0 0 20px;">Please verify the transaction details below. Rates are locked for 5 minutes.</p>
+    <div class="summary-box" id="confirmSummary"></div>
+    <div id="confirmPaymentField" style="margin-bottom:20px;"></div>
+    <div class="modal-btns">
+      <button class="modal-btn-secondary" onclick="closeModal('confirmModal')">Cancel</button>
+      <button class="modal-btn-primary" onclick="confirmTransaction()">Confirm &amp; Proceed</button>
+    </div>
+  </div>
+</div>
+
+<!-- Processing overlay -->
+<div class="processing-overlay" id="processingOverlay">
+  <div class="spin-ring"></div>
+  <h3>Executing High Velocity Conversion</h3>
+  <p>Locking rates, checking routing, and generating transaction record...</p>
+</div>
+
+<!-- Success Receipt Modal -->
+<div class="modal-overlay" id="receiptModal">
+  <div class="modal-box glass" style="text-align:center;">
+    <div class="modal-icon-circle">✓</div>
+    <h3 class="modal-title">Transaction Initiated!</h3>
+    <p class="modal-sub">Your transaction has been logged and is being processed by our system. You can view progress in the history tab.</p>
+    <div class="receipt-mono" id="receiptDetails"></div>
+    <button class="modal-btn-primary" style="width:100%;padding:16px;border-radius:14px;" onclick="closeModal('receiptModal')">Close Receipt →</button>
+  </div>
+</div>
+
+<!-- Callback Success Modal -->
+<div class="modal-overlay" id="callbackSuccessModal">
+  <div class="modal-box glass" style="text-align:center;">
+    <div class="modal-icon-circle">✓</div>
+    <h3 class="modal-title">Request Registered!</h3>
+    <p class="modal-sub">Excellent! A specialized TrustFX desk dealer is reviewing your expected conversion. We will call you on your listed mobile number in under 15 minutes.</p>
+    <div class="summary-box" style="justify-content:center;text-align:center;font-family:var(--font-mono);">
+      Assigned Desk: <span style="color:var(--primary);font-weight:700;">DESK-INDIA-04</span>
+    </div>
+    <button class="modal-btn-primary" style="width:100%;padding:14px;border-radius:12px;" onclick="closeModal('callbackSuccessModal')">Got It, Thanks!</button>
+  </div>
+</div>
+
+<!-- Transaction Detail Receipt Modal -->
+<div class="modal-overlay" id="txDetailModal">
+  <div class="modal-box glass" style="text-align:left;">
+    <button class="modal-close" onclick="closeModal('txDetailModal')">✕</button>
+    <div style="text-align:center;margin-bottom:20px;">
+      <span style="font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;color:var(--on-surface-variant);display:block;margin-bottom:4px;">TRUSTFX BLOCKCHAIN FOREX RECEIPT</span>
+      <h4 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:#fff;margin:0;">Receipt Summary</h4>
+    </div>
+    <div class="receipt-mono" id="txDetailContent" style="border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);border-radius:0;padding:16px 0;"></div>
+    <div id="txDetailStatus" class="callout" style="margin-bottom:8px;"></div>
+    <button class="modal-btn-secondary" style="width:100%;padding:12px;border-radius:12px;font-weight:700;margin-top:8px;" onclick="closeModal('txDetailModal')">Close Receipt</button>
+  </div>
+</div>
+
+<!-- Admin / Rates Editor Modal -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal-box glass wide" id="adminModalInner">
+    <!-- PIN screen -->
+    <div id="pinScreen" style="text-align:center;">
+      <div class="modal-icon-circle">🛡️</div>
+      <h2 class="modal-title">Security Verification</h2>
+      <p class="modal-sub">Enter your 4-digit administrative PIN to access the Rates &amp; Spread Controls. (Hint: Use 3113)</p>
+      <div class="pin-row">
+        <input type="password" maxlength="1" class="pin-digit" data-idx="0" oninput="pinInput(this,0)">
+        <input type="password" maxlength="1" class="pin-digit" data-idx="1" oninput="pinInput(this,1)">
+        <input type="password" maxlength="1" class="pin-digit" data-idx="2" oninput="pinInput(this,2)">
+        <input type="password" maxlength="1" class="pin-digit" data-idx="3" oninput="pinInput(this,3)">
+      </div>
+      <div class="form-error hidden" id="pinError">⚠ Invalid administrative PIN. Please try again.</div>
+      <div class="modal-btns">
+        <button class="modal-btn-secondary" onclick="closeModal('adminModal')">Cancel</button>
+        <button class="modal-btn-primary" onclick="verifyPin()">Verify PIN</button>
+      </div>
+    </div>
+    <!-- Rates screen -->
+    <div id="ratesScreen" class="hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 style="font-family:var(--font-display);font-size:18px;font-weight:700;color:#fff;margin:0;">🔓 Administrative Rates</h2>
+        <span style="font-size:10px;font-family:var(--font-mono);text-transform:uppercase;background:rgba(0,228,121,.1);color:var(--primary);padding:2px 10px;border-radius:999px;">Unlocked</span>
+      </div>
+      <form onsubmit="saveRates(event)">
+        <div class="form-field"><label>USD to INR base rate</label><input type="number" step="0.0001" id="rate-usdToInr"></div>
+        <div class="form-field"><label>USDT to INR base rate</label><input type="number" step="0.01" id="rate-usdtToInr"></div>
+        <div class="form-grid">
+          <div class="form-field"><label style="font-size:9px;">USDT Buy Rate (Spread)</label><input type="number" step="0.01" id="rate-usdtBuy"></div>
+          <div class="form-field"><label style="font-size:9px;">USDT Sell Rate (Spread)</label><input type="number" step="0.01" id="rate-usdtSell"></div>
+        </div>
+        <div class="form-field"><label>Platform Service Fee (%)</label><input type="number" step="0.1" id="rate-fee"></div>
+        <div class="modal-btns" style="margin-top:8px;">
+          <button type="button" class="modal-btn-secondary" onclick="lockAdmin()">Lock Control</button>
+          <button type="submit" class="modal-btn-primary">Save Rates</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   GOOGLE SHEETS LOGGING (via Google Apps Script Web App)
+===================================================================== */
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbx8eLmMCWwG4ICnmibDpJdAEf8cC1CZaKwjNaEdwbej3nKECXW09BvuNWYGU2_jgF9r/exec';
+
+function sendToSheet(payload){
+  // Fire-and-forget POST. mode:'no-cors' means we can't read the response,
+  // but the request still reaches your Apps Script and gets logged.
+  try{
+    fetch(GAS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
+    }).catch(err => console.warn('Sheet logging failed (network):', err));
+  }catch(err){
+    console.warn('Sheet logging failed:', err);
+  }
+}
+
+/* =====================================================================
+   STATE
+===================================================================== */
+let rates = {
+  usdToInr: 83.1232, usdtToInr: 91.45,
+  usdBuyRate: 83.15, usdSellRate: 83.15,
+  usdtBuyRate: 91.25, usdtSellRate: 91.45,
+  serviceFeePercent: 0.2, lastUpdated: 'Live'
+};
+
+let transactions = JSON.parse(localStorage.getItem('trustfx_transactions') || 'null') || [
+  { id:'TX-940281', date:'Oct 24, 2023', amount:12400.00, rate:83.15, receivedAmount:1031060.00, type:'SELL_USDT', status:'COMPLETED', fee:24.80 },
+  { id:'TX-108429', date:'Oct 22, 2023', amount:5000.00, rate:83.12, receivedAmount:415600.00, type:'SELL_USDT', status:'PENDING', fee:10.00 },
+  { id:'TX-724108', date:'Oct 19, 2023', amount:28000.00, rate:83.20, receivedAmount:2329600.00, type:'SELL_USDT', status:'REJECTED', fee:56.00 },
+];
+
+function saveTx(){ localStorage.setItem('trustfx_transactions', JSON.stringify(transactions)); }
+
+let profile = { fullName:'Alex Rivera', traderId:'#TRFX-9982-K2', email:'a.rivera@private.trading', location:'Singapore • UTC+8' };
+let referral = { code:'TRUST-ALEX-88X', referredCount:12, earnedAmount:450, targetAmount:500 };
+
+let portalMode = 'PUBLIC';
+let currentTab = 'ANALYTICS';
+let convType = 'SELL_USDT';
+let isAdminUnlocked = false;
+let pendingConfirmData = null; // holds data while confirm modal open
+let historyFilter = { status:'ALL', search:'' };
+
+/* =====================================================================
+   NAV / SCROLL
+===================================================================== */
+window.addEventListener('scroll', ()=>{
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+});
+function scrollToId(id){
+  setTimeout(()=>{ document.getElementById(id)?.scrollIntoView({behavior:'smooth'}); }, 60);
+}
+function toggleMobileMenu(){ document.getElementById('mobileMenu').classList.toggle('open'); }
+function closeMobileAnd(fn){ document.getElementById('mobileMenu').classList.remove('open'); fn(); }
+
+function tradeNow(){
+  if(portalMode === 'PUBLIC'){ scrollToId('converter-section'); }
+  else { setPortal('PUBLIC'); scrollToId('converter-section'); }
+}
+
+function setPortal(mode){
+  portalMode = mode;
+  document.getElementById('publicPortal').style.display = mode === 'PUBLIC' ? 'block' : 'none';
+  document.getElementById('traderDashboard').classList.toggle('active', mode === 'TRADER');
+  document.getElementById('nav-markets').classList.toggle('active', mode === 'PUBLIC');
+  document.getElementById('nav-portfolio').classList.toggle('active', mode === 'TRADER');
+  document.getElementById('login-btn').textContent = mode === 'PUBLIC' ? 'Login' : 'Log Out';
+  document.getElementById('login-btn').onclick = ()=> setPortal(mode === 'PUBLIC' ? 'TRADER' : 'PUBLIC');
+  if(mode === 'TRADER'){ renderTab(); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+
+function setTab(tab){
+  currentTab = tab;
+  ['ANALYTICS','DASHBOARD','EXCHANGES','WALLETS','SETTINGS'].forEach(t=>{
+    document.getElementById('tab-'+t).classList.toggle('active', t === tab);
+  });
+  renderTab();
+}
+
+/* =====================================================================
+   TICKER
+===================================================================== */
+function renderTicker(){
+  const rowsHtml = `
+    <span>USD/INR <span class="up">₹${rates.usdToInr.toFixed(4)} ↑ 0.04%</span></span>
+    <span>USDT/INR <span class="up">₹${rates.usdtToInr.toFixed(2)} ↑ 0.12%</span></span>
+    <span>GOLD/INR <span class="up">₹62,450 ↑ 0.08%</span></span>
+    <span>BTC/USDT <span class="down">$64,231 ↓ 1.2%</span></span>
+    <span>ETH/USDT <span class="up">$3,450 ↑ 0.5%</span></span>
+  `;
+  let out = '';
+  for(let i=0;i<3;i++){ out += `<div class="ticker-group">${rowsHtml}</div>`; }
+  document.getElementById('tickerContent').innerHTML = out;
+  document.getElementById('heroUsdtRate').textContent = `₹${rates.usdtToInr.toFixed(2)} ↑`;
+}
+
+/* =====================================================================
+   CONVERTER
+===================================================================== */
+function convLabel(t){ return t.replace('_',' '); }
+function currencyLabel(type, side){
+  // side: 'send' or 'receive'
+  if(type === 'SELL_USDT') return side==='send' ? 'USDT' : 'INR';
+  if(type === 'BUY_USDT') return side==='send' ? 'INR' : 'USDT';
+  if(type === 'USD_TO_INR') return side==='send' ? 'USD' : 'INR';
+  if(type === 'INR_TO_USD') return side==='send' ? 'INR' : 'USD';
+}
+function rateForType(type){
+  if(type === 'SELL_USDT') return rates.usdtSellRate;
+  if(type === 'BUY_USDT') return rates.usdtBuyRate;
+  if(type === 'USD_TO_INR') return rates.usdSellRate;
+  if(type === 'INR_TO_USD') return rates.usdBuyRate;
+}
+function setConvType(t){
+  convType = t;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.toggle('active', b.dataset.type === t));
+  recalcConverter();
+}
+function swapConvType(){
+  const map = {SELL_USDT:'BUY_USDT', BUY_USDT:'SELL_USDT', USD_TO_INR:'INR_TO_USD', INR_TO_USD:'USD_TO_INR'};
+  setConvType(map[convType]);
+}
+function recalcConverter(){
+  const val = parseFloat(document.getElementById('sendValue').value) || 0;
+  const feeFactor = 1 - (rates.serviceFeePercent/100);
+  let computed = 0;
+  if(convType === 'SELL_USDT') computed = val * rates.usdtSellRate * feeFactor;
+  else if(convType === 'BUY_USDT') computed = (val / rates.usdtBuyRate) * feeFactor;
+  else if(convType === 'USD_TO_INR') computed = val * rates.usdSellRate * feeFactor;
+  else if(convType === 'INR_TO_USD') computed = (val / rates.usdBuyRate) * feeFactor;
+  document.getElementById('receiveValue').value = computed.toFixed(2);
+
+  const rateVal = rateForType(convType);
+  document.getElementById('sendRateLabel').textContent = 'Rate: ₹' + (convType.includes('USDT') ? rateVal.toFixed(2) : rateVal.toFixed(4));
+  document.getElementById('feeLabel').textContent = 'Service Fee: ' + rates.serviceFeePercent + '%';
+  document.getElementById('sendCurrencyChip').textContent = currencyLabel(convType,'send');
+  document.getElementById('receiveCurrencyChip').textContent = currencyLabel(convType,'receive');
+  document.getElementById('convSubmitBtn').innerHTML = '⚡ Start ' + convLabel(convType) + ' Transaction';
+}
+
+function startTransaction(){
+  const val = parseFloat(document.getElementById('sendValue').value) || 0;
+  if(val <= 0) return;
+  const receiveValue = parseFloat(document.getElementById('receiveValue').value) || 0;
+  const rateVal = rateForType(convType);
+
+  pendingConfirmData = { amount: val, type: convType, rate: rateVal, receivedAmount: receiveValue };
+
+  const summary = document.getElementById('confirmSummary');
+  summary.innerHTML = `
+    <div class="summary-row"><span>Transaction Type:</span><span>${convLabel(convType)}</span></div>
+    <div class="summary-row"><span>You Send:</span><span>${val} ${currencyLabel(convType,'send')}</span></div>
+    <div class="summary-row"><span style="color:var(--on-surface-variant)">Guaranteed Rate:</span><span style="color:var(--primary)">₹${convType.includes('USDT') ? rateVal.toFixed(2) : rateVal.toFixed(4)}</span></div>
+    <div class="summary-row"><span>You Receive (Net):</span><span style="color:var(--primary)">${receiveValue} ${currencyLabel(convType,'receive')}</span></div>
+  `;
+
+  let fieldHtml = '';
+  if(convType === 'SELL_USDT') fieldHtml = `<div class="form-field"><label>Your UPI ID or Bank Details (to receive INR)</label><input type="text" value="alexrivera@okaxis"></div>`;
+  else if(convType === 'BUY_USDT') fieldHtml = `<div class="form-field"><label>Your USDT (TRC20) Wallet Address (to receive USDT)</label><input type="text" style="font-family:var(--font-mono);" value="0x71C...849f"></div>`;
+  else if(convType === 'USD_TO_INR') fieldHtml = `<div class="form-field"><label>Bank Account Number (to receive INR)</label><input type="text" value="918273645012"></div>`;
+  else fieldHtml = `<div class="form-field"><label>Global SWIFT/IBAN Routing Info (to receive USD)</label><input type="text" value="UTIB0001234"></div>`;
+  document.getElementById('confirmPaymentField').innerHTML = fieldHtml;
+
+  openModal('confirmModal');
+}
+
+function confirmTransaction(){
+  closeModal('confirmModal');
+  document.getElementById('processingOverlay').classList.add('open');
+  setTimeout(()=>{
+    document.getElementById('processingOverlay').classList.remove('open');
+    const d = pendingConfirmData;
+    const feeAmount = d.amount * (rates.serviceFeePercent/100);
+    const newTx = {
+      id: 'TX-' + Math.floor(100000+Math.random()*900000),
+      date: new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+      amount: d.amount, rate: d.rate, receivedAmount: d.receivedAmount,
+      type: d.type, status:'PENDING', fee: feeAmount
+    };
+    transactions.unshift(newTx); saveTx();
+
+    sendToSheet({
+      source: 'converter_transaction',
+      txId: newTx.id,
+      date: newTx.date,
+      type: newTx.type,
+      amountSent: newTx.amount,
+      rate: newTx.rate,
+      amountReceived: newTx.receivedAmount,
+      fee: newTx.fee,
+      status: newTx.status,
+      timestamp: new Date().toISOString()
+    });
+
+    const sentCur = newTx.type.includes('BUY') ? 'INR' : 'USDT';
+    const recvCur = newTx.type.includes('BUY') ? 'USDT' : 'INR';
+    document.getElementById('receiptDetails').innerHTML = `
+      <div class="row"><span>REF ID:</span><span style="font-weight:700;">${newTx.id}</span></div>
+      <div class="row"><span>DATE:</span><span>${newTx.date}</span></div>
+      <div class="row"><span>SENT AMOUNT:</span><span style="font-weight:700;">${newTx.amount} ${sentCur}</span></div>
+      <div class="row"><span>LOCKED RATE:</span><span>₹${newTx.rate.toFixed(4)}</span></div>
+      <div class="row"><span>EST RECEIVED:</span><span style="color:var(--primary);font-weight:700;">${newTx.receivedAmount} ${recvCur}</span></div>
+      <div class="row"><span>STATUS:</span><span style="color:var(--amber);font-weight:700;">PENDING (AUTO-SETTLING)</span></div>
+    `;
+    openModal('receiptModal');
+    if(portalMode === 'TRADER') renderTab();
+  }, 2200);
+}
+
+/* =====================================================================
+   CALLBACK FORM
+===================================================================== */
+function submitCallback(e){
+  e.preventDefault();
+  const name = document.getElementById('cf-name').value.trim();
+  const phone = document.getElementById('cf-phone').value.trim();
+  const email = document.getElementById('cf-email').value.trim();
+  const amount = document.getElementById('cf-amount').value.trim();
+  const type = document.getElementById('cf-type').value;
+  const errEl = document.getElementById('cf-error');
+  if(!name || !phone || !email || !amount){ errEl.classList.remove('hidden'); return; }
+  errEl.classList.add('hidden');
+
+  const btn = document.getElementById('cfSubmitBtn');
+  btn.disabled = true; btn.textContent = 'Registering Callback...';
+
+  setTimeout(()=>{
+    btn.disabled = false; btn.innerHTML = 'Register Transaction Callback →';
+    const parsedAmount = parseFloat(amount.replace(/[^0-9.]/g,'')) || 500;
+    let txType = 'SELL_USDT', rateToUse = rates.usdtSellRate;
+    if(type.includes('Buy USDT')){ txType='BUY_USDT'; rateToUse=rates.usdtBuyRate; }
+    else if(type.includes('USD to INR')){ txType='USD_TO_INR'; rateToUse=rates.usdSellRate; }
+    else if(type.includes('INR to USD')){ txType='INR_TO_USD'; rateToUse=rates.usdBuyRate; }
+
+    const received = (txType==='SELL_USDT'||txType==='USD_TO_INR')
+      ? parsedAmount * rateToUse * (1 - rates.serviceFeePercent/100)
+      : (parsedAmount / rateToUse) * (1 - rates.serviceFeePercent/100);
+
+    const newTx = {
+      id:'TX-'+Math.floor(100000+Math.random()*900000),
+      date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+      amount:parsedAmount, rate:rateToUse, receivedAmount:Number(received.toFixed(2)),
+      type:txType, status:'PENDING', fee:parsedAmount*(rates.serviceFeePercent/100)
+    };
+    transactions.unshift(newTx); saveTx();
+    if(portalMode==='TRADER') renderTab();
+
+    sendToSheet({
+      source: 'callback_form',
+      name, phone, email,
+      requestedAmount: amount,
+      transactionType: type,
+      generatedTxId: newTx.id,
+      timestamp: new Date().toISOString()
+    });
+
+    document.getElementById('cf-name').value='';
+    document.getElementById('cf-phone').value='';
+    document.getElementById('cf-email').value='';
+    document.getElementById('cf-amount').value='';
+    openModal('callbackSuccessModal');
+  }, 1600);
+}
+
+/* =====================================================================
+   MODAL HELPERS
+===================================================================== */
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+/* =====================================================================
+   ADMIN / RATES EDITOR
+===================================================================== */
+let tempRates = {...rates};
+function openAdmin(){
+  isAdminUnlocked = false;
+  document.getElementById('pinScreen').classList.remove('hidden');
+  document.getElementById('ratesScreen').classList.add('hidden');
+  document.querySelectorAll('.pin-digit').forEach(i=>i.value='');
+  document.getElementById('pinError').classList.add('hidden');
+  openModal('adminModal');
+  setTimeout(()=>document.querySelector('.pin-digit[data-idx="0"]').focus(), 100);
+}
+function pinInput(el, idx){
+  el.value = el.value.replace(/\D/g,'').slice(-1);
+  if(el.value && idx < 3){ document.querySelector('.pin-digit[data-idx="'+(idx+1)+'"]').focus(); }
+}
+function verifyPin(){
+  const pin = Array.from(document.querySelectorAll('.pin-digit')).map(i=>i.value).join('');
+  if(pin === '3113'){
+    isAdminUnlocked = true;
+    document.getElementById('pinScreen').classList.add('hidden');
+    document.getElementById('ratesScreen').classList.remove('hidden');
+    tempRates = {...rates};
+    document.getElementById('rate-usdToInr').value = tempRates.usdToInr;
+    document.getElementById('rate-usdtToInr').value = tempRates.usdtToInr;
+    document.getElementById('rate-usdtBuy').value = tempRates.usdtBuyRate;
+    document.getElementById('rate-usdtSell').value = tempRates.usdtSellRate;
+    document.getElementById('rate-fee').value = tempRates.serviceFeePercent;
+  } else {
+    document.getElementById('pinError').classList.remove('hidden');
+    document.querySelectorAll('.pin-digit').forEach(i=>i.value='');
+    document.querySelector('.pin-digit[data-idx="0"]').focus();
+  }
+}
+function lockAdmin(){
+  document.getElementById('pinScreen').classList.remove('hidden');
+  document.getElementById('ratesScreen').classList.add('hidden');
+  document.querySelectorAll('.pin-digit').forEach(i=>i.value='');
+}
+function saveRates(e){
+  e.preventDefault();
+  const usdToInr = parseFloat(document.getElementById('rate-usdToInr').value)||0;
+  const usdtToInr = parseFloat(document.getElementById('rate-usdtToInr').value)||0;
+  rates = {
+    usdToInr, usdtToInr,
+    usdBuyRate: usdToInr - 0.15, usdSellRate: usdToInr + 0.15,
+    usdtBuyRate: parseFloat(document.getElementById('rate-usdtBuy').value)||0,
+    usdtSellRate: parseFloat(document.getElementById('rate-usdtSell').value)||0,
+    serviceFeePercent: parseFloat(document.getElementById('rate-fee').value)||0,
+    lastUpdated: new Date().toLocaleTimeString()
+  };
+  renderTicker();
+  recalcConverter();
+  if(portalMode==='TRADER') renderTab();
+  closeModal('adminModal');
+}
+
+/* =====================================================================
+   TRADER DASHBOARD RENDERING
+===================================================================== */
+function renderTab(){
+  const area = document.getElementById('tabContentArea');
+  if(currentTab === 'DASHBOARD' || currentTab === 'ANALYTICS'){
+    area.innerHTML = historyTableHTML();
+    attachHistoryEvents();
+  } else if(currentTab === 'EXCHANGES'){
+    area.innerHTML = `
+      <div class="tab-content-box glass-card">
+        <h3>Live Market Spreads &amp; Custom Surcharges</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div class="rate-tile">
+            <div class="l">USDT Corporate Buy Rate</div>
+            <div class="v">₹${rates.usdtBuyRate.toFixed(2)}</div>
+            <div class="d">Sourced from decentralized order-books with 0.15% priority markdown spread.</div>
+          </div>
+          <div class="rate-tile">
+            <div class="l">USDT Corporate Sell Rate</div>
+            <div class="v">₹${rates.usdtSellRate.toFixed(2)}</div>
+            <div class="d">Sourced from decentralized order-books with 0.15% priority markup spread.</div>
+          </div>
+        </div>
+        <div class="callout green">⭐ Corporate traders currently enjoy a 50% discount on priority order routing margins.</div>
+      </div>`;
+  } else if(currentTab === 'WALLETS'){
+    area.innerHTML = `
+      <div class="tab-content-box glass-card">
+        <h3>Secure Custody Wallets &amp; Multi-Sig Hubs</h3>
+        <div class="wallet-row">
+          <div><div class="name">Tether USDT (TRC20)</div><div class="addr">0x71C...849f</div></div>
+          <span class="wallet-badge active">Active Custody</span>
+        </div>
+        <div class="wallet-row">
+          <div><div class="name">Ethereum ETH</div><div class="addr">0x0F2...66A1</div></div>
+          <span class="wallet-badge inactive">No Holdings</span>
+        </div>
+      </div>`;
+  } else {
+    area.innerHTML = `
+      <div class="tab-content-box glass-card">
+        <h3>Identity Credentials &amp; SWIFT Routing</h3>
+        <p style="font-size:12px;color:var(--on-surface-variant);line-height:1.7;">Under Federal FEMA rulings, verifying corporate routing is mandatory to unlock large bulk volume limits exceeding ₹5,00,000 daily.</p>
+        <div class="callout green">✓ Your identity is KYC verified and cleared for unlimited bulk FX conversion.</div>
+      </div>`;
+  }
+}
+
+function historyTableHTML(){
+  const filtered = transactions.filter(tx=>{
+    const statusMatches = historyFilter.status === 'ALL' || tx.status === historyFilter.status;
+    const q = historyFilter.search.toLowerCase();
+    const searchMatches = tx.id.toLowerCase().includes(q) || tx.type.toLowerCase().includes(q) || tx.amount.toString().includes(historyFilter.search);
+    return statusMatches && searchMatches;
+  });
+
+  let rowsHtml = '';
+  if(filtered.length === 0){
+    rowsHtml = `<tr><td colspan="7" class="empty-row">No matching transactions found.</td></tr>`;
+  } else {
+    filtered.forEach(tx=>{
+      const sentCur = tx.type.includes('BUY') || tx.type==='INR_TO_USD' ? 'INR' : 'USDT';
+      const recvCur = tx.type.includes('BUY') || tx.type==='INR_TO_USD' ? 'USDT' : 'INR';
+      let statusChip = '';
+      if(tx.status==='COMPLETED') statusChip = '<span class="status-chip completed">Completed</span>';
+      else if(tx.status==='PENDING') statusChip = '<span class="status-chip pending">⏱ Pending</span>';
+      else statusChip = '<span class="status-chip rejected">Rejected</span>';
+      rowsHtml += `<tr>
+        <td class="font-mono" style="color:#fff;font-size:12px;">${tx.id}</td>
+        <td style="color:var(--on-surface-variant);font-size:12px;">${tx.date}</td>
+        <td style="font-size:12px;"><span class="tx-type-chip">${tx.type.replace('_',' ')}</span></td>
+        <td style="text-align:right;font-family:var(--font-mono);font-size:12px;">${tx.amount.toLocaleString()} ${sentCur}</td>
+        <td style="text-align:right;font-family:var(--font-mono);font-size:12px;color:var(--primary);font-weight:700;">${tx.receivedAmount.toLocaleString()} ${recvCur}</td>
+        <td>${statusChip}</td>
+        <td style="text-align:right;"><button class="info-btn" onclick='showTxDetail("${tx.id}")'>ℹ</button></td>
+      </tr>`;
+    });
+  }
+
+  return `
+    <div class="history-box glass-card">
+      <div class="history-head">
+        <h3>🧾 Transaction History</h3>
+        <div class="history-controls">
+          <div class="search-wrap"><span class="si">🔍</span><input type="text" id="historySearch" placeholder="Search tx ID or amount..." value="${historyFilter.search}"></div>
+          <select id="historyStatusFilter">
+            <option value="ALL" ${historyFilter.status==='ALL'?'selected':''}>All Status</option>
+            <option value="COMPLETED" ${historyFilter.status==='COMPLETED'?'selected':''}>Completed</option>
+            <option value="PENDING" ${historyFilter.status==='PENDING'?'selected':''}>Pending</option>
+            <option value="REJECTED" ${historyFilter.status==='REJECTED'?'selected':''}>Rejected</option>
+          </select>
+        </div>
+      </div>
+      <div class="history-table-wrap">
+        <table class="history-table">
+          <thead><tr><th>Transaction ID</th><th>Date</th><th>Type</th><th style="text-align:right;">Amount Sent</th><th style="text-align:right;">Settled Amount</th><th>Status</th><th style="text-align:right;">Details</th></tr></thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+      </div>
+    </div>`;
+}
+function attachHistoryEvents(){
+  const s = document.getElementById('historySearch');
+  const f = document.getElementById('historyStatusFilter');
+  if(s) s.addEventListener('input', e=>{ historyFilter.search = e.target.value; renderTab(); s.focus(); s.setSelectionRange(s.value.length,s.value.length); });
+  if(f) f.addEventListener('change', e=>{ historyFilter.status = e.target.value; renderTab(); });
+}
+function showTxDetail(id){
+  const tx = transactions.find(t=>t.id===id);
+  if(!tx) return;
+  const sentCur = tx.type.includes('BUY') || tx.type==='INR_TO_USD' ? 'INR' : 'USDT';
+  const recvCur = tx.type.includes('BUY') || tx.type==='INR_TO_USD' ? 'USDT' : 'INR';
+  document.getElementById('txDetailContent').innerHTML = `
+    <div class="row"><span>TRANSACTION ID:</span><span style="font-weight:700;">${tx.id}</span></div>
+    <div class="row"><span>DATE RECORDED:</span><span>${tx.date}</span></div>
+    <div class="row"><span>CONVERSION TYPE:</span><span style="font-weight:700;">${tx.type.replace('_',' ')}</span></div>
+    <div class="row"><span>SENT SUM:</span><span>${tx.amount.toLocaleString()} ${sentCur}</span></div>
+    <div class="row"><span>LOCKED VALUE RATE:</span><span>1 unit = ₹${tx.rate.toFixed(4)}</span></div>
+    <div class="row"><span>PLATFORM FEES:</span><span>${tx.fee.toFixed(2)} units</span></div>
+    <div class="row divider"><span style="color:#fff;font-weight:700;">TOTAL RECEIVED:</span><span style="color:var(--primary);font-weight:700;font-size:14px;">${tx.receivedAmount.toLocaleString()} ${recvCur}</span></div>
+  `;
+  const statusEl = document.getElementById('txDetailStatus');
+  if(tx.status==='COMPLETED'){
+    statusEl.className='callout green';
+    statusEl.innerHTML = '✓ This transaction was fully settled in 4 minutes 23 seconds. Reference logs are stored on ledger block #842911.';
+  } else if(tx.status==='PENDING'){
+    statusEl.className='callout'; statusEl.style.background='rgba(245,158,11,.08)'; statusEl.style.color='var(--amber)'; statusEl.style.border='1px solid rgba(245,158,11,.2)';
+    statusEl.innerHTML = '⏱ Awaiting automatic ledger confirmation (Estimated settlement: under 5 minutes). No action required.';
+  } else {
+    statusEl.className='callout'; statusEl.style.background='rgba(248,113,113,.08)'; statusEl.style.color='#f87171'; statusEl.style.border='1px solid rgba(248,113,113,.2)';
+    statusEl.innerHTML = '⚠ This transaction was cancelled or rejected due to a mismatched bank routing name.';
+  }
+  openModal('txDetailModal');
+}
+
+function exportCSV(){
+  const csvContent = "data:text/csv;charset=utf-8," + ["ID,Date,Type,Amount,Rate,Received,Status"].join(",") + "\\n"
+    + transactions.map(t=>`${t.id},${t.date},${t.type},${t.amount},${t.rate},${t.receivedAmount},${t.status}`).join("\\n");
+  const link = document.createElement('a');
+  link.href = encodeURI(csvContent);
+  link.download = 'trustfx_trader_logs.csv';
+  document.body.appendChild(link); link.click(); document.body.removeChild(link);
+}
+
+/* Profile edit */
+function editProfile(){
+  document.getElementById('identityFields').parentElement.querySelector('.identity-actions').style.display='none';
+  document.getElementById('identityFields').style.display='none';
+  document.getElementById('identityEdit').classList.remove('hidden');
+  document.getElementById('edit-name').value = profile.fullName;
+  document.getElementById('edit-id').value = profile.traderId;
+  document.getElementById('edit-email').value = profile.email;
+  document.getElementById('edit-location').value = profile.location;
+}
+function cancelEditProfile(){
+  document.getElementById('identityFields').style.display='grid';
+  document.getElementById('identityFields').parentElement.querySelector('.identity-actions').style.display='flex';
+  document.getElementById('identityEdit').classList.add('hidden');
+}
+function saveProfile(){
+  profile.fullName = document.getElementById('edit-name').value;
+  profile.email = document.getElementById('edit-email').value;
+  profile.location = document.getElementById('edit-location').value;
+  renderProfile();
+  cancelEditProfile();
+}
+function renderProfile(){
+  document.getElementById('fld-name').textContent = profile.fullName;
+  document.getElementById('fld-id').textContent = profile.traderId;
+  document.getElementById('fld-email').textContent = profile.email;
+  document.getElementById('fld-location').textContent = profile.location;
+  document.getElementById('sbName').textContent = profile.fullName;
+}
+
+function deleteAccount(){
+  if(confirm('Are you sure you want to delete your trader identity? This will reset local data.')){
+    localStorage.removeItem('trustfx_transactions');
+    location.reload();
+  }
+}
+
+function copyReferral(){
+  navigator.clipboard.writeText(referral.code).catch(()=>{});
+  const btn = document.getElementById('copyRefBtn');
+  btn.textContent = 'Copied'; btn.classList.add('copied');
+  setTimeout(()=>{ btn.textContent='📋'; btn.classList.remove('copied'); }, 2000);
+}
+
+function renderReferral(){
+  document.getElementById('refCode').textContent = referral.code;
+  document.getElementById('refCount').textContent = referral.referredCount;
+  document.getElementById('refEarned').textContent = '$'+referral.earnedAmount;
+  const percent = Math.min(100, (referral.earnedAmount/referral.targetAmount)*100);
+  document.getElementById('refProgress').style.width = percent+'%';
+  document.getElementById('refNote').textContent = '$'+(referral.targetAmount-referral.earnedAmount)+' until next bonus payout';
+}
+
+/* =====================================================================
+   INIT
+===================================================================== */
+renderTicker();
+recalcConverter();
+renderProfile();
+renderReferral();
+setInterval(renderTicker, 30000);
+</script>
+</body>
+</html>
