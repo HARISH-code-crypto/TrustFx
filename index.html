@@ -6,6 +6,25 @@
 <title>TrustFX — India's Highest Velocity Forex</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1008391512061247');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1008391512061247&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <style>
 :root{
   --font-sans:"Inter",ui-sans-serif,system-ui,sans-serif;
@@ -1208,6 +1227,14 @@ function startTransaction(){
   else fieldHtml = `<div class="form-field"><label>Global SWIFT/IBAN Routing Info (to receive USD)</label><input type="text" value="UTIB0001234"></div>`;
   document.getElementById('confirmPaymentField').innerHTML = fieldHtml;
 
+  if(typeof fbq === 'function'){
+    fbq('track', 'InitiateCheckout', {
+      value: val,
+      currency: currencyLabel(convType,'send'),
+      content_name: convLabel(convType)
+    });
+  }
+
   openModal('confirmModal');
 }
 
@@ -1225,6 +1252,15 @@ function confirmTransaction(){
       type: d.type, status:'PENDING', fee: feeAmount
     };
     transactions.unshift(newTx); saveTx();
+
+    if(typeof fbq === 'function'){
+      fbq('track', 'Purchase', {
+        value: newTx.amount,
+        currency: newTx.type.includes('BUY') ? 'INR' : 'USDT',
+        content_name: newTx.type,
+        transaction_id: newTx.id
+      });
+    }
 
     sendToSheet({
       source: 'converter_transaction',
@@ -1291,6 +1327,14 @@ function submitCallback(e){
     };
     transactions.unshift(newTx); saveTx();
     if(portalMode==='TRADER') renderTab();
+
+    if(typeof fbq === 'function'){
+      fbq('track', 'Lead', {
+        content_name: type,
+        value: parsedAmount,
+        currency: type.includes('USD') && !type.includes('USDT') ? 'USD' : (type.includes('INR') ? 'INR' : 'USDT')
+      });
+    }
 
     sendToSheet({
       source: 'callback_form',
